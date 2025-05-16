@@ -1,0 +1,62 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+.container {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+h2 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+.tabs-container {
+    margin-bottom: 15px;
+}
+.tab-buttons button {
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    margin-right: 5px;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+.tab-buttons button.active {
+    background-color: #ddd;
+    border-bottom: 1px solid #ddd; /* 下線をコンテンツエリアと一体化させる */
+}
+.tab-content {
+    padding: 15px;
+    border: 1px solid #ccc;
+    min-height: 80px;
+    border-radius: 0 0 4px 4px; /* ボタンの下側と合うように */
+}
+.tab-panel {
+    display: none; /* 初期状態では非表示 */
+}
+.tab-panel.active {
+    display: block; /* アクティブなパネルのみ表示 */
+}
+pre {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-size: 0.9em;
+}
+code {
+    font-family: 'Courier New', Courier, monospace;
+}
+.explanation {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #eef;
+    border-left: 3px solid #77a;
+    font-size: 0.95em;
+} 

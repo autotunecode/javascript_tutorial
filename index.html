@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS, Vue, React タブメニュー比較</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Vue.js CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- React CDN and Babel for JSX transpilation -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+
+    <h1>JavaScript, Vue.js, React.js タブメニュー比較</h1>
+    <p>このドキュメントでは、同じタブメニュー機能を3つの異なる技術スタック（素のJavaScript、Vue.js、React.js）で実装し、そのコードと特性を比較します。</p>
+
+    <!-- 1. Vanilla JavaScript Tab Menu -->
+    <div class="container">
+        <h2>1. 素のJavaScript (Vanilla JS)</h2>
+        <div id="vanilla-tabs-container" class="tabs-container">
+            <div class="tab-buttons">
+                <button data-tab-target="#vanilla-panel1" class="active">タブ 1 (JS)</button>
+                <button data-tab-target="#vanilla-panel2">タブ 2 (JS)</button>
+                <button data-tab-target="#vanilla-panel3">タブ 3 (JS)</button>
+            </div>
+            <div class="tab-content">
+                <div id="vanilla-panel1" class="tab-panel active">
+                    <p>これは素のJavaScriptで実装されたタブ1のコンテンツです。</p>
+                </div>
+                <div id="vanilla-panel2" class="tab-panel">
+                    <p>これは素のJavaScriptで実装されたタブ2のコンテンツです。</p>
+                </div>
+                <div id="vanilla-panel3" class="tab-panel">
+                    <p>これは素のJavaScriptで実装されたタブ3のコンテンツです。</p>
+                </div>
+            </div>
+        </div>
+        <div class="explanation">
+            <h4>特性:</h4>
+            <ul>
+                <li><strong>直接的なDOM操作:</strong> <code>document.getElementById</code> や <code>element.classList</code> などを使い、DOMを直接操作します。</li>
+                <li><strong>手続き型:</strong> イベントリスナーを設定し、クリックされたら「何を」「どのように」変更するかを明示的に記述します。</li>
+                <li><strong>状態管理:</strong> UIの状態（どのタブがアクティブかなど）は、開発者がCSSクラスや属性を使って手動で管理する必要があります。</li>
+                <li><strong>学習コスト:</strong> JavaScriptの基本知識があれば理解しやすいですが、複雑なUIではコードが煩雑になりがちです。</li>
+                <li><strong>柔軟性:</strong> ライブラリやフレームワークの制約がないため、非常に自由度が高いです。</li>
+            </ul>
+            <h4>コード:</h4>
+            <pre><code class="language-javascript">
+// vanilla.js ファイルを参照
+            </code></pre>
+        </div>
+    </div>
+
+    <!-- 2. Vue.js Tab Menu -->
+    <div class="container">
+        <h2>2. Vue.js</h2>
+        <div id="vue-app" class="tabs-container">
+            <div class="tab-buttons">
+                <button
+                    v-for="tab in tabs"
+                    :key="tab.id"
+                    @click="activeTab = tab.id"
+                    :class="{ active: activeTab === tab.id }">
+                    {{ tab.title }} (Vue)
+                </button>
+            </div>
+            <div class="tab-content">
+                <div
+                    v-for="tab in tabs"
+                    :key="tab.id"
+                    v-show="activeTab === tab.id"
+                    class="tab-panel"
+                    :class="{ active: activeTab === tab.id }">
+                    <p>{{ tab.content }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="explanation">
+            <h4>特性:</h4>
+            <ul>
+                <li><strong>宣言的レンダリング:</strong> HTMLテンプレート内でデータバインディング（<code>{{ }}</code>, <code>v-bind</code>, <code>v-for</code>など）を使い、データの状態に基づいてDOMがどうあるべきかを記述します。DOMの直接操作は通常行いません。</li>
+                <li><strong>リアクティブシステム:</strong> <code>data</code> オプションで定義されたデータ（例: <code>activeTab</code>）が変更されると、Vueが自動的に関連するDOMの部分を効率的に更新します。</li>
+                <li><strong>コンポーネントベース:</strong> (この例では単一インスタンスですが) UIを再利用可能なコンポーネントに分割して構築するのが一般的です。</li>
+                <li><strong>状態管理:</strong> UIの状態はVueインスタンスのデータプロパティとして管理されます。</li>
+                <li><strong>ディレクティブ:</strong> <code>v-for</code>, <code>v-if</code>, <code>v-show</code>, <code>v-on (@)</code>, <code>v-bind (:)</code> といった強力なディレクティブでDOMの振る舞いを制御します。</li>
+            </ul>
+            <h4>コード:</h4>
+            <pre><code class="language-javascript">
+// vue.js ファイルを参照
+
+            </code></pre>
+        </div>
+    </div>
+
+    <!-- 3. React.js Tab Menu -->
+    <div class="container">
+        <h2>3. React.js</h2>
+        <div id="react-app" class="tabs-container">
+            <!-- React will render here -->
+        </div>
+        <div class="explanation">
+            <h4>特性:</h4>
+            <ul>
+                <li><strong>コンポーネントベースアーキテクチャ:</strong> UIを独立した再利用可能な「コンポーネント」に分割して構築します。</li>
+                <li><strong>JSX:</strong> JavaScriptの拡張構文で、HTMLに似た記法でコンポーネントの構造を記述できます。これはBabelなどによってJavaScriptに変換されます。</li>
+                <li><strong>仮想DOM (Virtual DOM):</strong> 変更があるたびに実際のDOMを直接操作するのではなく、まずメモリ上の仮想DOMを更新し、差分だけを効率的に実際のDOMに適用します。</li>
+                <li><strong>状態 (State) とプロパティ (Props):</strong> コンポーネントは内部状態 (<code>useState</code>フック) と親から渡されるプロパティ (props) を持ちます。状態が変化するとコンポーネントは再レンダリングされます。</li>
+                <li><strong>単方向データフロー:</strong> データは親コンポーネントから子コンポーネントへと一方向に流れます。</li>
+            </ul>
+            <h4>コード:</h4>
+            <pre><code class="language-jsx">
+// index.html 170行目～参照
+            </code></pre>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>まとめと考察</h2>
+        <p>3つのアプローチで同じ機能を実現しましたが、その開発体験とコードの特性は大きく異なります。</p>
+        <dl>
+            <dt><strong>素のJavaScript</strong></dt>
+            <dd>
+                DOMを直接操作するため、何が起きているか直感的に理解しやすい面があります。しかし、UIが複雑化するにつれて状態管理やDOM操作のコードが肥大化し、見通しが悪くなる傾向があります。小規模なインタラクションや、ライブラリのオーバーヘッドを避けたい場合に適しています。
+            </dd>
+            <dt><strong>Vue.js</strong></dt>
+            <dd>
+                宣言的なテンプレート構文とリアクティブなデータバインディングにより、DOM操作を意識することなくUIを構築できます。状態（データ）が変更されればUIが自動的に更新されるため、開発者はロジックに集中できます。学習コストも比較的低く、既存のプロジェクトへの導入も容易です。HTMLに近いテンプレート構文はデザイナーにも親しみやすいでしょう。
+            </dd>
+            <dt><strong>React.js</strong></dt>
+            <dd>
+                コンポーネントベースの設計を強く推奨し、JSXというJavaScript内でHTML構造を記述するスタイルが特徴です。状態管理 (<code>useState</code>) と仮想DOMによる効率的なレンダリングが強力です。大規模なアプリケーション開発に適しており、エコシステムも非常に豊富です。JavaScript中心のアプローチであり、関数型プログラミングの概念とも相性が良いです。
+            </dd>
+        </dl>
+        <h3>選択のポイント</h3>
+        <ul>
+            <li><strong>プロジェクトの規模:</strong>
+                <ul>
+                    <li>小規模・シンプル: 素のJS、Vue</li>
+                    <li>中〜大規模・複雑: Vue、React</li>
+                </ul>
+            </li>
+            <li><strong>チームのスキルセット:</strong>
+                <ul>
+                    <li>HTML/CSS中心: Vueが馴染みやすい可能性</li>
+                    <li>JavaScript中心: Reactが馴染みやすい可能性</li>
+                </ul>
+            </li>
+            <li><strong>パフォーマンス要件:</strong>
+                <ul>
+                    <li>高度な最適化が必要: Vue, React (仮想DOMの恩恵)</li>
+                    <li>バンドルサイズ最小化: 素のJS</li>
+                </ul>
+            </li>
+            <li><strong>既存プロジェクトへの導入:</strong>
+                <ul>
+                    <li>Vueは段階的な導入がしやすい設計</li>
+                </ul>
+            </li>
+        </ul>
+        <p>これらの例を通じて、各技術の基本的な考え方やコードの書き方の違いを感じ取っていただければ幸いです。</p>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="vanilla.js"></script>
+    <script src="vue.js"></script>
+    <script type="text/babel">
+        // React.js App Logic (JSX)
+        const { useState } = React;
+
+        const tabsData = [
+            { id: 'react-panel1', title: 'タブ 1', content: 'これはReact.jsで実装されたタブ1のコンテンツです。' },
+            { id: 'react-panel2', title: 'タブ 2', content: 'これはReact.jsで実装されたタブ2のコンテンツです。' },
+            { id: 'react-panel3', title: 'タブ 3', content: 'これはReact.jsで実装されたタブ3のコンテンツです。' }
+        ];
+
+        function ReactTabComponent() {
+            const [activeTab, setActiveTab] = useState(tabsData[0].id); // 初期アクティブタブID
+
+            return (
+                <div>
+                    <div className="tab-buttons">
+                        {tabsData.map(tab => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={activeTab === tab.id ? 'active' : ''}
+                            >
+                                {tab.title} (React)
+                            </button>
+                        ))}
+                    </div>
+                    <div className="tab-content">
+                        {tabsData.map(tab => (
+                            <div
+                                key={tab.id}
+                                className={`tab-panel ${activeTab === tab.id ? 'active' : ''}`}
+                            >
+                                <p>{tab.content}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const reactRoot = ReactDOM.createRoot(document.getElementById('react-app'));
+        reactRoot.render(<ReactTabComponent />);
+    </script>
+
+</body>
+</html>
